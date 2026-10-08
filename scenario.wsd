@@ -9,7 +9,7 @@ database Database
 
 ' Display form and submit question
 User -> frontend : Access application
-frontend -- User : Display question input form
+frontend --> User : Display question input form
 User -> frontend : Submit question ("What should I do to..." / "What should I do if...")
 
 ' Backend processing & database query
@@ -18,20 +18,20 @@ backend -> backend : Standardize question text using NLP
 backend -> Database : Query answer for standardized question
 
 ' Alternative flow for query outcome
-alt answer found in databse 
-	Database --> backend : Return answer
-	backend --> frontend : Return answer
+alt Answer found in database
+    Database --> backend : Return answer
+    backend --> frontend : Return answer
 else Answer not found in database
-	Database --> backend : No answer found
-	backend -> Database : Save question for future review
-	backend --> frontend : Return placeholder ("Hmm... Let me think about it. Ask me again in 24 hours.")
+    Database --> backend : No answer found
+    backend -> Database : Save question for future review
+    backend --> frontend : Return placeholder ("Hmmm... Let me think about it. Ask me again in 24 hours.")
 end
 
 ' Revenue generation flow
-frontend -> "Ad Server" : Request new advertisement 
+frontend -> "Ad Server" : Request new advertisement
 "Ad Server" --> frontend : Return advertisement
 
 ' Final presentation to user
 frontend --> User : Display response alongside advertisement
 
-@enduml
+@endumll
